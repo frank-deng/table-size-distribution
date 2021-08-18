@@ -1,7 +1,9 @@
 export default class SizeDistributor{
     __conf=[];
     constructor(conf){
-        this.set(conf);
+        if(conf){
+            this.set(conf);
+        }
     }
     __checkNum(item,idx,key){
         if(!item.hasOwnProperty(key)){

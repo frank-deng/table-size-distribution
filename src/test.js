@@ -40,6 +40,22 @@ describe('Basic test',function(){
             40
         ]);
     });
+    it('Test 3',function(){
+        let sizeDistributor = new SizeDistributor([
+            {
+                size:10,
+            },
+            {
+            },
+            {
+            }
+        ]);
+        assert.deepStrictEqual(sizeDistributor.distribute(100),[
+            10,
+            45,
+            45
+        ]);
+    });
     it('Max size',function(){
         let sizeDistributor = new SizeDistributor([
             {
@@ -110,6 +126,29 @@ describe('Basic test',function(){
             300,
             200,
             100
+        ]);
+    });
+    it('Min size 3',function(){
+        let sizeDistributor = new SizeDistributor([
+            {
+                minSize:10,
+                fraction:3
+            },
+            {
+                minSize:20,
+                fraction:2
+            },
+            {
+                minSize:30,
+                fraction:1
+            },
+            {},{}
+        ]);
+        assert.deepStrictEqual(sizeDistributor.distribute(70),[
+            10,
+            20,
+            30,
+            5,5
         ]);
     });
 });

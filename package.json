@@ -2,7 +2,7 @@
   "name": "table-size-distribution",
   "version": "1.0.0",
   "description": "Calculate width for every columns (or height for every rows) based on given data",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "test": "rollup -c rollup.config-test.js && mocha ./__test__.js"
