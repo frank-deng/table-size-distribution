@@ -31,14 +31,46 @@ export default class SizeDistributor{
             if(hasMinSize && hasMaxSize && item.minSize > item.maxSize){
                 throw RangeError('minSize should be smaller than maxSize.');
             }
-            let newItem={
+            return {
                 ...item
             };
-            if(!hasSize && !hasFraction){
-                newItem.fraction=1;
-            }
-            return newItem;
         });
+
+        //为指定了minSize但没有指定fraction值的列计算出fraction
+        let idxProc=[], sizeTotal=0, idx=0;
+        for(let item of this.__conf){
+            if(!item.hasOwnProperty('size')
+                && !item.hasOwnProperty('fraction')
+                && item.hasOwnProperty('minSize')){
+                idxProc.push(idx);
+                sizeTotal+=item.minSize;
+            }
+            idx++;
+        }
+        for(let i of idxProc){
+            let item=this.__conf[i];
+            item.fraction=item.minSize/sizeTotal;
+        }
+
+        //计算fraction的平均值，为没有指定fraction和minSize的项目指定fraction
+        let fracCount=0, fracTotal=0;
+        idxProc=[], idx=0;
+        for(let item of this.__conf){
+            if(item.hasOwnProperty('size')){
+                idx++;
+                continue;
+            }
+            if(item.hasOwnProperty('fraction')){
+                fracCount++;
+                fracTotal+=item.fraction;
+            }else{
+                idxProc.push(idx);
+            }
+            idx++;
+        }
+        for(let i of idxProc){
+            this.__conf[i].fraction = (fracTotal && fracCount) ? fracTotal/fracCount : 0.1;
+        }
         return this;
     }
     distribute(size){
@@ -66,18 +98,8 @@ export default class SizeDistributor{
                 idx++;
             }
 
-            //处理完了
-            if(finished || fractionTotal<=0){
-                break;
-            }
-
-            //没有空间显示表格了，未计算宽度且未指定最小宽度的列，宽度作为0处理
-            if(remainingWidth<=0){
-                for(let item of conf){
-                    if(!item.hasOwnProperty('size')){
-                        item.size=(item.minSize || 0);
-                    }
-                }
+            //处理完了，或没有空间显示表格了
+            if(finished || fractionTotal<=0 || remainingWidth<=0){
                 break;
             }
 
@@ -87,14 +109,13 @@ export default class SizeDistributor{
                 let item=conf[idx];
                 let fraction=(item.hasOwnProperty('fraction') ? item.fraction : 1);
                 let size=remainingWidth * fraction / fractionTotal;
+                item.tempSize=size;
                 if(item.hasOwnProperty('maxSize') && size>item.maxSize){
                     finished=false;
                     item.size=item.maxSize;
                 } else if(item.hasOwnProperty('minSize') && size<item.minSize){
                     finished=false;
                     item.size=item.minSize;
-                } else{
-                    item.tempSize=size;
                 }
             }
 
