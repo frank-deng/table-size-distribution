@@ -29,7 +29,7 @@ export default class Layout{
         }
         //遍历配置项
         let itemSizeCount=0, itemSizeSum=0, itemMinSizeCount=0, itemMinSizeSum=0;
-        this.__confOrig=[];
+        this.__confBackup=[];
         this.__conf=conf.map((item, idx)=>{
             //校验各个配置项
             let hasSize=this.__checkNum(item,idx,'size');
@@ -155,12 +155,12 @@ export default class Layout{
             console.error('Dead loop detected');
         }
 
-        //如果有项目没有指定宽度，则宽度设为0
+        //如果有项目没有指定宽度或最小宽度，则宽度设为0
         let resultLength=result.length;
         for(let i=0; i<resultLength; i++){
             let value=result[i];
             if(null===value || undefined===value){
-                result[i]=0;
+                result[i]=conf[i].minSize || 0;
             }
         }
 

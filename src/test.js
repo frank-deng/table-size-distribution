@@ -55,8 +55,10 @@ describe('Basic test',function(){
                 size:4
             }
         ];
-        assert.deepStrictEqual(new Layout(conf).toJSON(),conf);
-
+        let layout=new Layout(conf);
+        assert.deepStrictEqual(layout.toJSON(),conf);
+        layout.set(conf);
+        assert.deepStrictEqual(layout.toJSON(),conf);
     });
     it('Test 3',function(){
         assert.deepStrictEqual(new Layout([
@@ -147,7 +149,7 @@ describe('Basic test',function(){
         ]);
     });
     it('Min size 3',function(){
-        assert.deepStrictEqual(new Layout([
+        let layout=new Layout([
             {
                 minSize:10,
                 size:3
@@ -162,12 +164,20 @@ describe('Basic test',function(){
             },
             {},
             {}
-        ]).layout(70),[
+        ]);
+        assert.deepStrictEqual(layout.layout(70),[
             10,
             20,
             30,
             5,
             5
+        ]);
+        assert.deepStrictEqual(layout.layout(40),[
+            10,
+            20,
+            30,
+            0,
+            0
         ]);
     });
 });
