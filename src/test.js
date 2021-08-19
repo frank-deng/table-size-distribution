@@ -5,7 +5,8 @@ describe('Basic test',function(){
     it('Test 1',function(){
         let sizeDistributor = new SizeDistributor([
             {
-                size:10,
+                minSize:10,
+                maxSize:10
             },
             {
                 minSize:50
@@ -21,29 +22,48 @@ describe('Basic test',function(){
         ]);
     });
     it('Test 2',function(){
-        let sizeDistributor = new SizeDistributor([
+        assert.deepStrictEqual(new SizeDistributor([
             {
-                size:10,
+                minSize:10,
+                maxSize:10
             },
             {
                 minSize:50,
-                fraction:5
+                size:5
             },
             {
                 minSize:10,
-                fraction:4
+                size:4
             }
-        ]);
-        assert.deepStrictEqual(sizeDistributor.distribute(100),[
+        ]).distribute(100),[
             10,
             50,
             40
         ]);
     });
+    it('Configuration backup',function(){
+        let conf=[
+            {
+                minSize:10,
+                maxSize:10
+            },
+            {
+                minSize:50,
+                size:5
+            },
+            {
+                minSize:10,
+                size:4
+            }
+        ];
+        assert.deepStrictEqual(new SizeDistributor(conf).toJSON(),conf);
+
+    });
     it('Test 3',function(){
         let sizeDistributor = new SizeDistributor([
             {
-                size:10,
+                minSize:10,
+                maxSize:10
             },
             {
             },
@@ -106,15 +126,15 @@ describe('Basic test',function(){
         let sizeDistributor = new SizeDistributor([
             {
                 minSize:10,
-                fraction:3
+                size:3
             },
             {
                 minSize:20,
-                fraction:2
+                size:2
             },
             {
                 minSize:30,
-                fraction:1
+                size:1
             }
         ]);
         assert.deepStrictEqual(sizeDistributor.distribute(10),[
@@ -122,25 +142,25 @@ describe('Basic test',function(){
             20,
             30
         ]);
-        assert.deepStrictEqual(sizeDistributor.distribute(600),[
-            300,
-            200,
-            100
+        assert.deepStrictEqual(sizeDistributor.distribute(1200).map(n=>Math.round(n)),[
+            600,
+            400,
+            200
         ]);
     });
     it('Min size 3',function(){
         let sizeDistributor = new SizeDistributor([
             {
                 minSize:10,
-                fraction:3
+                size:3
             },
             {
                 minSize:20,
-                fraction:2
+                size:2
             },
             {
                 minSize:30,
-                fraction:1
+                size:1
             },
             {},{}
         ]);
