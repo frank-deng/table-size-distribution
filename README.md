@@ -1,23 +1,23 @@
-Table Size Distribution
------------------------
+Table Size Layout
+-----------------
 
-Distribute column width or row height based on given parameters.
+Calculate column width or row height based on given parameters.
 
 Installation
 ------------
 
-	npm install --save table-size-distribution
+	npm install --save table-size-layout
 
 Import
 ------
 
 ES6/Webpack
 
-	import SizeDistributor from 'table-size-distribution';
+	import Layout from 'table-size-layout';
 
 Node.js
 
-	const SizeDistributor=require('table-size-distribution');
+	const Layout=require('table-size-layout');
 
 Script Tag
 
@@ -27,12 +27,12 @@ Script Tag
 Initialization
 --------------
 
-### `const sizeDistributor = new SizeDistributor();`
+### `const layout = new Layout();`
 
-Initialize a new instance of `SizeDistributor()` without size configuration.
+Initialize a new instance of `Layout()` without size configuration.
 
-### `const sizeDistributor = new SizeDistributor(conf);`
+### `const layout = new Layout(conf);`
 
-Initialize a new instance of `SizeDistributor()` with size configuration.
+Initialize a new instance of `Layout()` with size configuration.
 
 

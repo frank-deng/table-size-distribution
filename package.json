@@ -1,5 +1,5 @@
 {
-  "name": "table-size-distribution",
+  "name": "table-size-layout",
   "version": "1.0.0",
   "description": "Calculate width for every columns (or height for every rows) based on given data",
   "main": "dist/index.js",
@@ -9,19 +9,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frank-deng/table-size-distribution.git"
+    "url": "git+https://github.com/frank-deng/table-size-layout.git"
   },
   "keywords": [
     "table",
     "size",
-    "distribution"
+    "layout"
   ],
   "author": "Frank Deng",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/frank-deng/table-size-distribution/issues"
+    "url": "https://github.com/frank-deng/table-size-layout/issues"
   },
-  "homepage": "https://github.com/frank-deng/table-size-distribution#readme",
+  "homepage": "https://github.com/frank-deng/table-size-layout#readme",
   "browserslist": [
     "> 0.1%",
     "not dead",

@@ -1,4 +1,4 @@
-export default class SizeDistributor{
+export default class Layout{
     __confBackup=[];
     __conf=[];
     __fractionSum=0;
@@ -95,7 +95,7 @@ export default class SizeDistributor{
         }
         return this;
     }
-    distribute(size){
+    layout(size){
         if(isNaN(size)){
             throw new TypeError('Size must be a number');
         }
