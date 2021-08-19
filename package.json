@@ -1,6 +1,6 @@
 {
   "name": "table-size-layout",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Calculate width for every columns (or height for every rows) based on given data",
   "main": "dist/index.js",
   "scripts": {
