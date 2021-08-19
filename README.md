@@ -36,3 +36,44 @@ Initialize a new instance of `Layout()` without size configuration.
 Initialize a new instance of `Layout()` with size configuration.
 
 
+API
+---
+
+### `toJSON()`
+
+Return a copy of the size configuration in use, can be used with `JSON.stringify()`.
+
+### `layout(size)`
+
+Return the calculated sizes for each column.
+
+**Parameters**
+
+* `size` - Size of the container, must be a number greater than 0.
+
+**Returns**
+
+An array contains sizes for each column.
+
+**Throws**
+
+* `TypeError` - If `size` parameter is not a number.
+* `RangeError` - If `size` parameter is not greater than 0.
+
+### `set(conf)`
+
+Set configuration of each column.
+
+**Parameters**
+
+* `conf` - A non-empty array contains size configurations for each column.
+
+**Returns**
+
+A reference to this instance for chaining.
+
+**Throws**
+
+* `TypeError` - If `conf` is not a non-empty array or array contains element with data in wrong type.
+* `RangeError` - If `conf` array contains element with either `minSize`, `maxSize`, `size` parameter not greater than 0.
+
